@@ -1,15 +1,14 @@
-E-Mail - Redirect Bounce
+# Bounce plugin for Roundcube Webmail
 
-Introduction
-----------------------------------------
-Tis is plugin for roundcube
-Allow to redirect (a.k.a. "bounce") mail messages to other
+### About
 
-Ticket #1485774 http://trac.roundcube.net/ticket/1485774
+This is a fork of the bounce plugin for roundcube with
+support for Roundcube Webmail version 0.8.x.
 
-Contact
-----------------------------------------
-This is my first plugin, so please let me know what you think about it!
-Comments and suggestions are welcome.
+Both themes, the new "larry" and the old "classic", are supported.
 
-Email: dns.sobol@gmail.com
+Original ticket: http://trac.roundcube.net/ticket/1485774
+
+### Known Issues
+
+* "add cc" and "add bcc" links a currently commented out
