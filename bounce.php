@@ -21,20 +21,24 @@ class bounce extends rcube_plugin
     $this->register_action('plugin.bounce', array($this, 'request_action'));
 
     if ($rcmail->task == 'mail' && ($rcmail->action == '' || $rcmail->action == 'show')) {
-      $skin_path = $this->local_skin_path();
+
+      // include styles
+      $skin = $rcmail->config->get('skin');
+      if (!file_exists($this->home."/skins/$skin/bounce.css"))
+      	$skin = 'default';
+      $this->include_stylesheet("skins/$skin/bounce.css");
 
       $this->include_script('bounce.js');
       $this->add_texts('localization', true);
-      $this->add_button(
-        array(
-            'command' => 'plugin.bounce.box',
-            'title'   => 'bouncemessage',
-            'domain'  =>  $this->ID,
-            'imagepas' => $skin_path.'/bounce_pas.png',
-            'imageact' => $skin_path.'/bounce_act.png',
-            'class' => 'bounce-ico'
-        ),
-        'toolbar');
+	  $this->api->add_content(
+		  $this->api->output->button(array(
+			  'command' => 'plugin.bounce.box',
+			  'label' => 'bounce.bounce',
+			  'title' => 'bounce.bouncemessage',
+			  'class' => 'button buttonPas bounce disabled',
+			  'classact' => 'button bounce'
+		  )
+	  ), 'toolbar');
 
       $this->add_hook('render_page', array($this, 'render_box'));
 
@@ -64,7 +68,8 @@ class bounce extends rcube_plugin
       exit;
     }
 
-    $headers_old = $rcmail->imap->get_headers($msg_uid);
+    $headers_old = $rcmail->imap->get_message_headers($msg_uid);
+
     $a_recipients = array();
     $a_recipients['To'] = $mailto;
     if (!empty($mailcc)) $a_recipients['Cc'] = $mailcc;
@@ -157,10 +162,10 @@ class bounce extends rcube_plugin
 
 
     $table->add(null,null);
-    $table->add(formlinks,
+    /*$table->add(formlinks,
                 html::a(array('href'=>'#cc', 'onclick'=>'return rcmail_ui.show_header_form(\'cc\')', 'id'=>'cc-link'), Q(rcube_label('addcc'))).
                 '<span class="separator">|</span>'.
-                html::a(array('href'=>'#bcc', 'onclick'=>'return rcmail_ui.show_header_form(\'bcc\')', 'id'=>'bcc-link'), Q(rcube_label('addbcc'))));
+				html::a(array('href'=>'#bcc', 'onclick'=>'return rcmail_ui.show_header_form(\'bcc\')', 'id'=>'bcc-link'), Q(rcube_label('addbcc'))));*/
 
     $target_url = $_SERVER['REQUEST_URI'];
 

@@ -1,0 +1,42 @@
+#bounce-box
+{
+  position: absolute;
+  top: 200px;
+  left: 250px;
+  width: 550px;
+}
+
+.bounce-title
+{
+  height: 15px !important;
+  padding: 5px 0px 10px 0px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.bounce-body
+{
+  padding: 5px 10px 10px 10px;
+}
+
+.bounce-body .title
+{
+  width:75px;
+  color: #fff;
+}
+
+#bounce-box input.button
+{
+  margin-top: 8px;
+}
+
+.editfield {
+  width: 430px;
+}
+
+.toolbar a.button.bounce {
+	background-position: left -650px;
+}
+
