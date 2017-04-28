@@ -187,7 +187,10 @@ class bounce extends rcube_plugin
     $rcmail->output->add_gui_object('bouncebox', $attrib['id']);
     $rcmail->output->add_gui_object('bounceform', 'bounceform');
 
-    $this->include_stylesheet('bounce.css');
+    $skin = $rcmail->config->get('skin');
+    if (!file_exists($this->home."/skins/$skin/bounce.css"))
+    	$skin = 'default';
+    $this->include_stylesheet("skins/$skin/bounce.css");
     $rcmail->output->set_env('autocomplete_min_length', $rcmail->config->get('autocomplete_min_length'));
     $rcmail->output->add_gui_object('messageform', 'bounceform');
   }
